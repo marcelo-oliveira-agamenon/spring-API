@@ -20,11 +20,11 @@ public class UserResource {
         return userRepository.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    /*@GetMapping("/users/{id}")
     public User userFindOne(@PathVariable(value = "id") UUID id) {
         return userRepository.findById(id);
     }
-
+*/
     @PostMapping("/users")
     public User addUser(@RequestBody User user) {
         return userRepository.save(user);
