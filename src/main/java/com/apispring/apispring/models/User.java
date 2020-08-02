@@ -1,8 +1,8 @@
 package com.apispring.apispring.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 import java.util.Date;
@@ -11,6 +11,9 @@ import java.util.Date;
 @Table(name="users")
 public class User {
     @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "userId", columnDefinition = "VARCHAR(255)")
     private UUID userId;
     private String name;
     private String email;
