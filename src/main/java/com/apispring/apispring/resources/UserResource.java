@@ -29,4 +29,9 @@ public class UserResource {
     public User addUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
+    @DeleteMapping("/users")
+    public User addUser(@PathVariable(value = "id") UUID id) {
+        return userRepository.deleteUser(id);
+    }
 }
