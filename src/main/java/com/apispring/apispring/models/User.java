@@ -19,7 +19,7 @@ public class User {
     private String email;
     private Double phone;
     private String password;
-    private Date createdAt;
+    private Date createdAt = new Date();
     private Date modifiedAt;
 
     public UUID getUserId() {
