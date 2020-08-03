@@ -3,7 +3,6 @@ package com.apispring.apispring.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import java.util.Date;
@@ -14,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "userId", columnDefinition = "VARCHAR(255)")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
     private UUID userId;
     private String name;
     private String email;
