@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("SELECT * FROM users u WHERE u.userId = ?1")
-    User findByUUIDIs(UUID id);
+    /*@Query("SELECT * FROM users u WHERE u.userId = ?1")
+    User findByUUIDIs(UUID id);*/
 }
