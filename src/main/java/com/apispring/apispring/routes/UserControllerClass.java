@@ -19,4 +19,9 @@ public class UserControllerClass {
     public List<User> getAllUsers() {
         return userService.findAll();
     }
+
+    @RequestMapping(value = "/users/add", method = RequestMethod.POST)
+    public User saveUser(User user) {
+        return userService.save(user);
+    }
 }
