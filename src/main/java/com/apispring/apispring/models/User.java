@@ -23,6 +23,7 @@ public class User {
     private String phone;
     @Column(name="password", nullable = false)
     private String password;
+    @Column(name="createdAt", nullable = false)
     private Date createdAt = new Date();
     private Date modifiedAt;
 
