@@ -13,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "userId", columnDefinition = "BINARY(16)",updatable = false, nullable = false)
+    @Column(name = "userId", columnDefinition = "BINARY(16)")
     private UUID userId;
     private String name;
     private String email;
