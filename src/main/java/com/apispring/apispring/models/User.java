@@ -3,6 +3,7 @@ package com.apispring.apispring.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public class User {
     private UUID userId;
     private String name;
     private String email;
-    private Double phone;
+    private BigDecimal phone;
     private String password;
     private Date createdAt = new Date();
     private Date modifiedAt;
@@ -46,11 +47,11 @@ public class User {
         this.email = email;
     }
 
-    public Double getPhone() {
+    public BigDecimal getPhone() {
         return phone;
     }
 
-    public void setPhone(Double phone) {
+    public void setPhone(BigDecimal phone) {
         this.phone = phone;
     }
 
