@@ -22,7 +22,7 @@ public class UserResource {
 
     @GetMapping("/users/{id}")
     public User userFindOne(@PathVariable(value = "id") UUID id) {
-        return userRepository.findByUUID(id);
+        return userRepository.findByUUIDIs(id);
     }
 
     @PostMapping("/users")
