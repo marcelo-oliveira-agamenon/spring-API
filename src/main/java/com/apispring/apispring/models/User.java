@@ -17,11 +17,11 @@ public class User {
     private UUID userId;
     @Column(name="name", nullable = false)
     private String name;
-    @Column(name="name", nullable = false)
+    @Column(name="email", nullable = false)
     private String email;
-    @Column(name="name", nullable = false)
+    @Column(name="phone", nullable = false)
     private String phone;
-    @Column(name="name", nullable = false)
+    @Column(name="password", nullable = false)
     private String password;
     private Date createdAt = new Date();
     private Date modifiedAt;
