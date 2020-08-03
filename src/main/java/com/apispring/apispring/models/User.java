@@ -18,7 +18,7 @@ public class User {
     private UUID userId;
     private String name;
     private String email;
-    private BigDecimal phone;
+    private String phone;
     private String password;
     private Date createdAt = new Date();
     private Date modifiedAt;
@@ -47,11 +47,11 @@ public class User {
         this.email = email;
     }
 
-    public BigDecimal getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(BigDecimal phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
