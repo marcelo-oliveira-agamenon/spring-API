@@ -8,7 +8,7 @@ import java.util.UUID;
 import java.util.Date;
 
 @Entity
-@Table(name="users")
+@Table(name="users", schema = "public")
 public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
