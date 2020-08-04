@@ -19,6 +19,7 @@ public class UserControllerClass {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<User> getAllUsers() {
+        System.out.println("dasdsa");
         return userService.findAll();
     }
 
