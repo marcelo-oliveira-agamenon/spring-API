@@ -21,7 +21,6 @@ public class UserControllerClass {
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public User saveUser(@RequestBody User user) {
-        System.out.println(user);
         return userService.save(user);
     }
 
