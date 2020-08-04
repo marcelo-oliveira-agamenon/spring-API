@@ -1,14 +1,17 @@
 package com.apispring.apispring.routes;
 
 import com.apispring.apispring.models.User;
-import com.apispring.apispring.service.ResponseSimple;
 import com.apispring.apispring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api")
 public class UserControllerClass {
@@ -16,28 +19,42 @@ public class UserControllerClass {
     UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    @ResponseBody
-    public List<User> getAllUsers() {
-        return userService.findAll();
-    }
-
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseSimple saveUser(@RequestBody User user) {
-        userService.save(user);
-        return new ResponseSimple("User created");
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> userList = userService.findAll();
+        if(userList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public User getUser(@PathVariable("id")UUID id) {
-        return userService.findByUserId(id);
+    public ResponseEntity<User> getUser(@PathVariable("id")UUID id) {
+        Optional<User> resp = Optional.ofNullable(userService.findByUserId(id));
+        if(resp.isPresent()) {
+            return new ResponseEntity<User>(resp.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    public ResponseEntity<String> saveUser(@RequestBody User user) {
+        Optional<User> resp = Optional.ofNullable(userService.save(user));
+        if(resp.isPresent()) {
+            return new ResponseEntity<String>("User created", HttpStatus.OK);
+        } else {
+            return  new ResponseEntity<String>("This user doesn't exists",HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseSimple deleteUser(@PathVariable("id")UUID id) {
-        User resp = userService.delete(id);
-        return new ResponseSimple("User deleted");
+    public ResponseEntity<String> deleteUser(@PathVariable("id")UUID id) {
+        Optional<User> resp = Optional.ofNullable(userService.delete(id));
+        if (resp.isPresent()) {
+            return new ResponseEntity<String>("User deleted",HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("User Not found",HttpStatus.NOT_FOUND);
+        }
     }
 }
