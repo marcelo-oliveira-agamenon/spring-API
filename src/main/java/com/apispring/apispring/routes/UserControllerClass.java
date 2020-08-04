@@ -64,6 +64,7 @@ public class UserControllerClass {
         Optional<User> resp = Optional.ofNullable(userService.findByUserId(id));
         if (resp.isPresent()){
             user.setUserId(resp.get().getUserId());
+            user.setCreatedAt(resp.get().getCreatedAt());
             user.setModifiedAt(new Date());
             userService.save(user);
             return new ResponseEntity<String>("User Updated",HttpStatus.OK);
