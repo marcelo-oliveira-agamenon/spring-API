@@ -29,4 +29,11 @@ public class UserController implements UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public User delete(UUID id) {
+        User user = findByUserId(id);
+        userRepository.deleteById(id);
+        return user;
+    }
 }

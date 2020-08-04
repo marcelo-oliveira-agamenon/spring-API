@@ -10,4 +10,5 @@ public interface UserService {
     List<User> findAll();
     User findByUserId(UUID id);
     User save(User user);
+    User delete(UUID id);
 }
