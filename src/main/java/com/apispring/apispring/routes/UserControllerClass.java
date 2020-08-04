@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -63,6 +64,7 @@ public class UserControllerClass {
         Optional<User> resp = Optional.ofNullable(userService.findByUserId(id));
         if (resp.isPresent()){
             user.setUserId(resp.get().getUserId());
+            user.setModifiedAt(new Date());
             userService.save(user);
             return new ResponseEntity<String>("User Updated",HttpStatus.OK);
         } else {
