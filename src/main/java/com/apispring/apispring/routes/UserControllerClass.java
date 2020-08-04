@@ -19,12 +19,12 @@ public class UserControllerClass {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<User> getAllUsers() {
-        System.out.println("dasdsa");
         return userService.findAll();
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public User saveUser(User user) {
+        System.out.println("dasdsa" + user);
         return userService.save(user);
     }
 
