@@ -15,14 +15,10 @@ public class User {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "userId")
     private UUID userId;
-    @Column(name="name", nullable = false)
     private String name;
     private String email;
-    @Column(name="phone", nullable = false)
     private String phone;
-    @Column(name="password", nullable = false)
     private String password;
-    @Column(name="createdAt", nullable = false)
     private Date createdAt = new Date();
     private Date modifiedAt;
 
