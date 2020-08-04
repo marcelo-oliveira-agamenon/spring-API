@@ -5,6 +5,7 @@ import com.apispring.apispring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.UUID;
 public class UserControllerClass {
     @Autowired
     UserService userService;
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {
@@ -41,6 +43,7 @@ public class UserControllerClass {
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ResponseEntity<String> saveUser(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Optional<User> resp = Optional.ofNullable(userService.save(user));
         if(resp.isPresent()) {
             return new ResponseEntity<String>("User created", HttpStatus.OK);
@@ -66,6 +69,7 @@ public class UserControllerClass {
             user.setUserId(resp.get().getUserId());
             user.setCreatedAt(resp.get().getCreatedAt());
             user.setModifiedAt(new Date());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.save(user);
             return new ResponseEntity<String>("User Updated",HttpStatus.OK);
         } else {
