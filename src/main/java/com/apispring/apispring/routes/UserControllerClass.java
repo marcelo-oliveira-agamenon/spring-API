@@ -1,7 +1,7 @@
 package com.apispring.apispring.routes;
 
 import com.apispring.apispring.models.User;
-import com.apispring.apispring.service.ResponseWithJson;
+import com.apispring.apispring.service.ResponseSimple;
 import com.apispring.apispring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,24 +16,28 @@ public class UserControllerClass {
     UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @ResponseBody
     public List<User> getAllUsers() {
         return userService.findAll();
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseWithJson saveUser(@RequestBody User user) {
-        User userResp = userService.save(user);
-        return new ResponseWithJson("User created", userResp);
+    public ResponseSimple saveUser(@RequestBody User user) {
+        userService.save(user);
+        return new ResponseSimple("User created");
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public User getUser(@PathVariable("id")UUID id) {
         return userService.findByUserId(id);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public User deleteUser(@PathVariable("id")UUID id) {
-        return userService.delete(id);
+    @ResponseBody
+    public ResponseSimple deleteUser(@PathVariable("id")UUID id) {
+        User resp = userService.delete(id);
+        return new ResponseSimple("User deleted");
     }
 }
