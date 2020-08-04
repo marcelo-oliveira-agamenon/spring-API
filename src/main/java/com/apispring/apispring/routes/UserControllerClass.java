@@ -1,6 +1,7 @@
 package com.apispring.apispring.routes;
 
 import com.apispring.apispring.models.User;
+import com.apispring.apispring.service.ResponseWithJson;
 import com.apispring.apispring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,11 @@ public class UserControllerClass {
         return userService.findAll();
     }
 
-    @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public User saveUser(@RequestBody User user) {
-        return userService.save(user);
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseWithJson saveUser(@RequestBody User user) {
+        User userResp = userService.save(user);
+        return new ResponseWithJson("User created", userResp);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
