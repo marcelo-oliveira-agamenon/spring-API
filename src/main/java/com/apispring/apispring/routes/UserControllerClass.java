@@ -3,10 +3,7 @@ package com.apispring.apispring.routes;
 import com.apispring.apispring.models.User;
 import com.apispring.apispring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +20,7 @@ public class UserControllerClass {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public User saveUser(User user) {
+    public User saveUser(@RequestBody User user) {
         System.out.println(user);
         return userService.save(user);
     }
