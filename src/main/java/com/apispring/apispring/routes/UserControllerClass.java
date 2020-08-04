@@ -57,4 +57,16 @@ public class UserControllerClass {
             return new ResponseEntity<String>("User Not found",HttpStatus.NOT_FOUND);
         }
     }
+
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<String> update(@PathVariable("id")UUID id, @RequestBody User user) {
+        Optional<User> resp = Optional.ofNullable(userService.findByUserId(id));
+        if (resp.isPresent()){
+            user.setUserId(resp.get().getUserId());
+            userService.save(user);
+            return new ResponseEntity<String>("User Updated",HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("This user doesn't exist",HttpStatus.NOT_FOUND);
+        }
+    }
 }
