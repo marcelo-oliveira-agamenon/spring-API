@@ -24,11 +24,7 @@ public class UserControllerClass {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> userList = userService.findAll();
-        if(userList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
-        }
+        return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
