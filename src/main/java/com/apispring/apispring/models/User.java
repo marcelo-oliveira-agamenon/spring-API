@@ -26,6 +26,8 @@ public class User {
     @Column(name = "createdAt", nullable = false)
     private Date createdAt = new Date();
     private Date modifiedAt;
+    @Column(name="roles", nullable = false)
+    private UserRoles roles;
 
     public UUID getUserId() {
         return userId;
@@ -81,5 +83,13 @@ public class User {
 
     public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public UserRoles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(UserRoles roles) {
+        this.roles = roles;
     }
 }

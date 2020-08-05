@@ -66,6 +66,7 @@ public class UserControllerClass {
             user.setCreatedAt(resp.get().getCreatedAt());
             user.setModifiedAt(new Date());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(resp.get().getRoles());
             userService.save(user);
             return new ResponseEntity<String>("User Updated",HttpStatus.OK);
         } else {
